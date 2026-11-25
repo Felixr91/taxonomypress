@@ -1,0 +1,192 @@
+/* =========================================================
+   New components for Home, Open Call and Submit.
+   Paste into css/styles.css (components section).
+   ========================================================= */
+
+/* ---------- img-placeholder ----------
+   Stand-in for any image slot. Swap the <div> for an <img>. */
+.img-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  border: 1px dashed currentColor;
+  text-align: center;
+}
+
+/* ---------- plate--cover ----------
+   Image fills the plate edge to edge, with no animation.
+   Every cover plate gets the same ratio, so cards in a row line up. */
+.plate.plate--cover {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 36rem; /* keeps a lone full-width card from getting huge */
+  padding: 0;
+  overflow: hidden;
+}
+
+.plate.plate--cover > img,
+.plate.plate--cover > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* No motion on cover plates: stops keyframe animations and hover
+   transforms on the plate, its image, and any ink layers (::before/::after). */
+.plate.plate--cover,
+.plate.plate--cover::before,
+.plate.plate--cover::after,
+.plate.plate--cover > img,
+.plate.plate--cover > video {
+  animation: none;
+  transition: none;
+}
+
+.plate.plate--cover > img,
+.plate.plate--cover:hover > img,
+.product:hover .plate.plate--cover > img,
+.plate.plate--cover > video {
+  transform: none;
+}
+
+/* Placeholder keeps a margin so it still reads as "image goes here" */
+.plate.plate--cover > .img-placeholder {
+  position: absolute;
+  inset: var(--space-5);
+  width: auto;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+/* ---------- media-video ----------
+   Video from MediaSlot. Fills its box like a cover image. */
+.media-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A plate holding a video drops its padding so the video runs edge to edge.
+   Works anywhere a <Plate> wraps a <MediaSlot> video, no extra props. */
+.plate:has(> .media-video) {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.plate > .media-video {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  max-width: none;
+}
+
+/* ---------- cta ----------
+   Heading + short copy + one button. */
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+/* Optional illustration under the kicker (CtaSection `image` prop) */
+.section-head__image {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-top: var(--space-5);
+}
+
+.cta .body {
+  max-width: 60ch;
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+/* ---------- download ----------
+   Free printable card. Self-contained: does not reuse .product or .plate,
+   so it can be wider than a product card without breaking. */
+.download {
+  --download-ink: var(--color-riso-turquoise);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.download--cornflower { --download-ink: var(--color-riso-cornflower); }
+.download--paprika    { --download-ink: var(--color-riso-paprika); }
+.download--turquoise  { --download-ink: var(--color-riso-turquoise); }
+.download--violet     { --download-ink: var(--color-riso-violet); }
+
+.download__preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--download-ink) 25%, transparent);
+}
+
+.download__preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+.download__preview .img-placeholder {
+  height: 100%;
+  aspect-ratio: auto;
+  border-color: var(--download-ink);
+}
+
+.download__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.download__title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.download .link-button {
+  margin-top: var(--space-3);
+}
+
+/* ---------- icon + social-link ---------- */
+.icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+}
+
+.icon .icon__fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}

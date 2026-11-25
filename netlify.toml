@@ -1,0 +1,28 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Old .html URLs keep working
+[[redirects]]
+  from = "/floral-observer.html"
+  to = "/floral-observer"
+  status = 301
+
+[[redirects]]
+  from = "/open-call.html"
+  to = "/open-call"
+  status = 301
+
+[[redirects]]
+  from = "/submit.html"
+  to = "/submit"
+  status = 301
+
+# Single-page app: every other route loads index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

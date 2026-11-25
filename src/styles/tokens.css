@@ -1,0 +1,138 @@
+/* ==========================================================================
+   Taxonomy Press design tokens
+   Names mirror the DTCG token paths in tokens/taxonomy-press.tokens.json
+   (Design Tokens Format Module 2025.10). color.riso.cornflower becomes
+   --color-riso-cornflower, and so on. If you change a value here, change it
+   in the JSON too so designers and code stay in sync.
+
+   Layers:
+     1. Primitives  (color.riso, color.paper, font, space, size)
+     2. Semantics   (color.surface, color.text, color.ink, type.*)
+   Components should only use semantic tokens.
+   ========================================================================== */
+:root {
+  /* Preferred. Decorative fills and plates only; too light for text on paper. */
+  --color-riso-cornflower: #62a8e5;
+  /* Preferred. Warm accent plate. Black text on paprika passes AA. */
+  --color-riso-paprika: #ee7f4b;
+  /* Supporting. Focus rings and functional accents. */
+  --color-riso-blue: #0078bf;
+  /* Preferred. Plate color; not for small text on paper. */
+  --color-riso-turquoise: #00aa93;
+  /* Preferred. Plate color. Black text on violet passes AA. */
+  --color-riso-violet: #9d7ad2;
+  /* Supporting. Sparing accent, alerts. */
+  --color-riso-tomato: #d2515e;
+  /* Primary text ink. */
+  --color-riso-black: #000000;
+  /* Default page stock, an uncoated natural paper. */
+  --color-paper-natural: #f3eee3;
+  /* Lighter stock for raised surfaces. */
+  --color-paper-bright: #fbf9f4;
+  --color-surface-page: var(--color-paper-natural);
+  --color-surface-raised: var(--color-paper-bright);
+  --color-surface-inverse: var(--color-riso-black);
+  --color-text-primary: var(--color-riso-black);
+  /* Secondary text. Black at 68% on natural paper still passes AA. */
+  --color-text-muted: rgb(0 0 0 / 0.68);
+  --color-text-inverse: var(--color-paper-bright);
+  /* Grid dividers. */
+  --color-line-hairline: var(--color-riso-black);
+  --color-ink-one: var(--color-riso-cornflower);
+  --color-ink-two: var(--color-riso-paprika);
+  --color-ink-three: var(--color-riso-turquoise);
+  --color-ink-four: var(--color-riso-violet);
+  --color-ink-five: var(--color-riso-blue);
+  --color-ink-six: var(--color-riso-tomato);
+  --color-action-underline: var(--color-riso-paprika);
+  --color-action-hover-fill: var(--color-riso-cornflower);
+  --color-action-focus: var(--color-riso-blue);
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  /* The thin dividing line used throughout the grid. */
+  --size-hairline: 1px;
+  --size-rule: 2px;
+  --size-focus-ring: 3px;
+  /* Max width for reading passages, roughly 68 characters. */
+  --size-measure: 42rem;
+  --size-page-max: 90rem;
+  /* Offset between overprinted plates, imitating Riso misregistration. */
+  --size-misregister: 3px;
+  /* Columns at the widest breakpoint. 6 at medium, 4 at small. */
+  --grid-columns: 12;
+  --motion-duration-quick: 120ms;
+  --motion-duration-base: 240ms;
+  --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  /* Display face for the Taxonomy Press wordmark and headlines. Uses the Adobe Fonts kit when present, with the free TeX Gyre Bonum (a Bookman revival) bundled as fallback. */
+  --font-family-bookman: "bookman-jf-pro", "TeX Gyre Bonum", "Bookman Old Style", "URW Bookman", serif;
+  /* Soft, wonky old-style serif for decks, pull quotes and accents. Replaces Orson Casual Shaded and Tuppence. */
+  --font-family-fraunces: "Fraunces", "Georgia", serif;
+  /* Reading face for long passages. Replaces Plantin. */
+  --font-family-newsreader: "Newsreader", "Georgia", serif;
+  /* Specimen-label face for metadata, prices and taxonomy tags. */
+  --font-family-dm-mono: "DM Mono", ui-monospace, monospace;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5625rem;
+  --font-size-2xl: 1.953rem;
+  --font-size-3xl: 2.441rem;
+  --font-size-4xl: 3.052rem;
+  --font-size-5xl: 3.815rem;
+  --font-size-6xl: 5.96rem;
+  --font-size-7xl: 9.313rem;
+  --font-line-height-tight: 0.92;
+  --font-line-height-snug: 1.15;
+  --font-line-height-normal: 1.4;
+  --font-line-height-relaxed: 1.65;
+  --font-tracking-tight: -0.02rem;
+  --font-tracking-none: 0;
+  --font-tracking-wide: 0.08rem;
+  --type-wordmark-font-family: var(--font-family-bookman);
+  --type-wordmark-font-size: var(--font-size-7xl);
+  --type-wordmark-font-weight: var(--font-weight-regular);
+  --type-wordmark-letter-spacing: var(--font-tracking-tight);
+  --type-wordmark-line-height: var(--font-line-height-tight);
+  --type-display-font-family: var(--font-family-bookman);
+  --type-display-font-size: var(--font-size-5xl);
+  --type-display-font-weight: var(--font-weight-regular);
+  --type-display-letter-spacing: var(--font-tracking-tight);
+  --type-display-line-height: var(--font-line-height-tight);
+  --type-heading-font-family: var(--font-family-bookman);
+  --type-heading-font-size: var(--font-size-2xl);
+  --type-heading-font-weight: var(--font-weight-regular);
+  --type-heading-letter-spacing: var(--font-tracking-none);
+  --type-heading-line-height: var(--font-line-height-snug);
+  --type-deck-font-family: var(--font-family-fraunces);
+  --type-deck-font-size: var(--font-size-xl);
+  --type-deck-font-weight: var(--font-weight-light);
+  --type-deck-letter-spacing: var(--font-tracking-none);
+  --type-deck-line-height: var(--font-line-height-normal);
+  --type-body-font-family: var(--font-family-newsreader);
+  --type-body-font-size: var(--font-size-lg);
+  --type-body-font-weight: var(--font-weight-regular);
+  --type-body-letter-spacing: var(--font-tracking-none);
+  --type-body-line-height: var(--font-line-height-relaxed);
+  --type-label-font-family: var(--font-family-dm-mono);
+  --type-label-font-size: var(--font-size-xs);
+  --type-label-font-weight: var(--font-weight-regular);
+  --type-label-letter-spacing: var(--font-tracking-wide);
+  --type-label-line-height: var(--font-line-height-normal);
+  --border-hairline: var(--size-hairline) solid var(--color-line-hairline);
+  --transition-ink: var(--motion-duration-base) var(--motion-easing-standard) 0ms;
+}

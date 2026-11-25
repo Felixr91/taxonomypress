@@ -1,0 +1,70 @@
+/* =========================================================
+   Component: issue-card
+   Paste into css/styles.css (components section).
+   ========================================================= */
+
+.issues {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.issue-card {
+  --issue-ink: var(--color-riso-cornflower);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+}
+
+.issue-card--cornflower { --issue-ink: var(--color-riso-cornflower); }
+.issue-card--paprika    { --issue-ink: var(--color-riso-paprika); }
+.issue-card--turquoise  { --issue-ink: var(--color-riso-turquoise); }
+.issue-card--violet     { --issue-ink: var(--color-riso-violet); }
+
+/* Image slot: holds a cover image or the placeholder */
+.issue-card__image {
+  margin: 0 0 var(--space-3);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--issue-ink) 18%, transparent);
+}
+
+/* .img-placeholder inside fills the slot */
+.issue-card__image .img-placeholder {
+  height: 100%;
+  aspect-ratio: auto;
+  border-color: var(--issue-ink);
+}
+
+.issue-card__image--wide {
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  height: 100%;
+}
+
+.issue-card__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply; /* riso overprint feel */
+}
+
+.issue-card__title {
+  margin: 0;
+  font-family: var(--font-display, serif);
+  font-size: var(--text-xl, 1.5rem);
+  line-height: 1.1;
+}
+
+/* Pushes price + link to the bottom so cards align in a row */
+.issue-card__price {
+  margin-top: auto;
+}
+
+.issue-card__link {
+  align-self: start;
+  color: var(--issue-ink);
+  text-underline-offset: 0.2em;
+}

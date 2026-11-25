@@ -1,0 +1,541 @@
+/* ==========================================================================
+   Taxonomy Press
+   Load order: tokens.css, then this file.
+
+   Contents
+   01. Fonts
+   02. Reset and base
+   03. Grid system (hairline grid)
+   04. Typography components
+   05. Site header and footer
+   06. Riso effects (overprint, plates, grain)
+   07. Components (swatch, product card, section head, link button)
+   08. Floral Observer (article layout, passage, species index)
+   09. Utilities
+   ========================================================================== */
+
+
+/* 01. Fonts ----------------------------------------------------------------
+   Bookman: if you have an Adobe Fonts kit with Bookman JF Pro, add its
+   <link> tag to each page's <head>. It is first in --font-family-bookman, so
+   it wins automatically. TeX Gyre Bonum (a free Bookman revival, GUST Font
+   License) is bundled as the fallback. */
+
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  src: url("../fonts/texgyrebonum-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  src: url("../fonts/texgyrebonum-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  src: url("../fonts/texgyrebonum-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  src: url("../fonts/texgyrebonum-bolditalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+/* 02. Reset and base ------------------------------------------------------ */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+img, svg { display: block; max-width: 100%; height: auto; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  font-family: var(--type-body-font-family);
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-height-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: var(--size-focus-ring) solid var(--color-action-focus);
+  outline-offset: 2px;
+}
+
+::selection { background: var(--color-ink-one); color: var(--color-text-primary); }
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+  font-family: var(--type-label-font-family);
+  font-size: var(--font-size-sm);
+}
+.skip-link:focus { top: var(--space-4); }
+
+.page {
+  max-width: var(--size-page-max);
+  margin-inline: auto;
+  padding: var(--space-4);
+}
+@media (min-width: 64rem) {
+  .page { padding: var(--space-6); }
+}
+
+
+/* 03. Grid system ----------------------------------------------------------
+   One rule: the grid draws its top and left edge, every cell draws its right
+   and bottom edge. Lines never double up, whatever the cell count.
+
+   Columns:  4 (small)  /  6 (from 40rem)  /  12 (from 64rem)
+   Cells span the full row by default. Set spans per breakpoint:
+     .span-sm-2  .span-md-3  .span-lg-4  ...
+
+   Nest a grid inside a cell with .grid--nested (drops its outer frame). */
+
+.grid {
+  --cols: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  border-top: var(--border-hairline);
+  border-left: var(--border-hairline);
+}
+.grid + .grid { border-top: 0; }
+
+.grid > * {
+  grid-column: span var(--span, var(--cols));
+  border-right: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+  min-width: 0;
+}
+
+.grid--nested { border: 0; }
+
+.cell { padding: var(--space-5); }
+.cell--flush { padding: 0; }
+.cell--loose { padding: var(--space-6); }
+
+.span-sm-1 { --span: 1; } .span-sm-2 { --span: 2; } .span-sm-3 { --span: 3; } .span-sm-4 { --span: 4; }
+
+@media (min-width: 40rem) {
+  .grid { --cols: 6; }
+  .grid > * { grid-column: span var(--span-md, var(--span, var(--cols))); }
+  .span-md-1 { --span-md: 1; } .span-md-2 { --span-md: 2; } .span-md-3 { --span-md: 3; }
+  .span-md-4 { --span-md: 4; } .span-md-5 { --span-md: 5; } .span-md-6 { --span-md: 6; }
+}
+
+@media (min-width: 64rem) {
+  .grid { --cols: 12; }
+  .grid > * { grid-column: span var(--span-lg, var(--span-md, var(--span, var(--cols)))); }
+  .span-lg-1 { --span-lg: 1; } .span-lg-2 { --span-lg: 2; } .span-lg-3 { --span-lg: 3; }
+  .span-lg-4 { --span-lg: 4; } .span-lg-5 { --span-lg: 5; } .span-lg-6 { --span-lg: 6; }
+  .span-lg-7 { --span-lg: 7; } .span-lg-8 { --span-lg: 8; } .span-lg-9 { --span-lg: 9; }
+  .span-lg-10 { --span-lg: 10; } .span-lg-11 { --span-lg: 11; } .span-lg-12 { --span-lg: 12; }
+}
+
+
+
+/* 04. Typography components ----------------------------------------------- */
+
+.label {
+  font-family: var(--type-label-font-family);
+  font-size: var(--type-label-font-size);
+  letter-spacing: var(--type-label-letter-spacing);
+  line-height: var(--type-label-line-height);
+  text-transform: uppercase;
+}
+.label--muted { color: var(--color-text-muted); }
+
+.display {
+  font-family: var(--type-display-font-family);
+  font-size: clamp(var(--font-size-3xl), 6vw, var(--type-display-font-size));
+  font-weight: var(--type-display-font-weight);
+  letter-spacing: var(--type-display-letter-spacing);
+  line-height: 1;
+}
+
+.heading {
+  font-family: var(--type-heading-font-family);
+  font-size: var(--type-heading-font-size);
+  font-weight: var(--type-heading-font-weight);
+  line-height: var(--type-heading-line-height);
+}
+
+.deck {
+  font-family: var(--type-deck-font-family);
+  font-size: clamp(var(--font-size-lg), 2vw, var(--type-deck-font-size));
+  font-weight: var(--type-deck-font-weight);
+  line-height: var(--type-deck-line-height);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+.body {
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+}
+
+.italic { font-style: italic; }
+
+
+/* 05. Site header and footer ---------------------------------------------- */
+
+.site-header .cell { display: flex; align-items: center; }
+
+.site-header__brand {
+  font-family: var(--font-family-bookman);
+  font-size: var(--font-size-xl);
+  text-decoration: none;
+  line-height: 1;
+}
+.site-header__brand em { font-style: italic; }
+
+.site-nav {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 3.5rem;
+}
+.site-nav a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  text-decoration: none;
+  border-left: var(--border-hairline);
+  transition: background-color var(--motion-duration-base) var(--motion-easing-standard);
+}
+.site-nav a:first-child { border-left: 0; }
+.site-nav a:hover { background: var(--color-action-hover-fill); }
+.site-nav a[aria-current="page"] { background: var(--color-ink-two); }
+
+.site-footer { margin-top: var(--space-7); }
+.site-footer__mark {
+  font-family: var(--font-family-bookman);
+  font-style: italic;
+  font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
+  line-height: 1;
+}
+.site-footer ul { list-style: none; padding: 0; display: grid; gap: var(--space-2); }
+.site-footer p + p { margin-top: var(--space-3); }
+
+
+/* 06. Riso effects ---------------------------------------------------------
+   Overprint: the same text set twice in two inks, offset slightly and
+   multiplied, like a two-color Riso pass that is a hair out of register.
+   Where the inks overlap they mix to a dark tone, which keeps the headline
+   above 3:1 contrast on paper. Colored edges carry the riso look.
+   The second copy is aria-hidden so screen readers read the text once. */
+
+.overprint {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  color: var(--overprint-top, var(--color-ink-four));
+}
+.overprint__shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: var(--overprint-under, var(--color-ink-one));
+  transform: translate(calc(var(--size-misregister) * 1.5), calc(var(--size-misregister) * -1));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
+}
+.overprint--paprika { --overprint-top: var(--color-ink-two); --overprint-under: var(--color-ink-three); }
+
+.wordmark {
+  font-family: var(--type-wordmark-font-family);
+  font-size: clamp(var(--font-size-4xl), 14vw, var(--type-wordmark-font-size));
+  font-weight: var(--type-wordmark-font-weight);
+  letter-spacing: var(--type-wordmark-letter-spacing);
+  line-height: var(--type-wordmark-line-height);
+}
+.wordmark em { font-style: italic; }
+
+.plate {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: var(--space-5);
+  background: var(--plate-bg, var(--color-surface-raised));
+}
+.plate img { width: 100%; }
+.plate--paprika { --plate-bg: color-mix(in srgb, var(--color-ink-two) 22%, var(--color-surface-raised)); }
+.plate--cornflower { --plate-bg: color-mix(in srgb, var(--color-ink-one) 22%, var(--color-surface-raised)); }
+.plate--turquoise { --plate-bg: color-mix(in srgb, var(--color-ink-three) 18%, var(--color-surface-raised)); }
+.plate--violet { --plate-bg: color-mix(in srgb, var(--color-ink-four) 20%, var(--color-surface-raised)); }
+
+/* Paper grain over the whole page. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.35 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* 07. Components ---------------------------------------------------------- */
+
+/* Hero */
+.hero { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-7); }
+.hero .deck { max-width: 32ch; }
+@media (min-width: 64rem) { .hero { min-height: 32rem; } }
+
+/* Ink swatches */
+.swatch { display: flex; flex-direction: column; gap: var(--space-3); }
+.swatch__chip {
+  /* aspect-ratio: 3 / 1; */
+  height: 50px;
+  background: var(--chip);
+  background-image: radial-gradient(rgb(0 0 0 / 0.14) 1px, transparent 1.3px);
+  background-size: 6px 6px;
+}
+.swatch__name { font-family: var(--font-family-fraunces); font-size: var(--font-size-lg); font-style: italic; }
+
+/* Section head */
+.section-head { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-5); }
+.section-head__row { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4); }
+
+/* Link button */
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-hairline);
+  font-family: var(--type-label-font-family);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--type-label-letter-spacing);
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--color-surface-raised);
+  transition: background-color var(--motion-duration-base) var(--motion-easing-standard);
+}
+.link-button:hover { background: var(--color-ink-two); }
+.link-button span[aria-hidden] { transition: transform var(--motion-duration-base) var(--motion-easing-standard); }
+.link-button:hover span[aria-hidden] { transform: translateX(3px); }
+
+/* Product card: the whole cell is the link target via a stretched link. */
+.product { position: relative; display: flex; flex-direction: column; }
+.product .plate { height: auto; aspect-ratio: 4 / 5; border-bottom: var(--border-hairline); }
+.product .plate img { transition: transform var(--motion-duration-base) var(--motion-easing-standard); }
+.product:hover .plate img { transform: rotate(-3deg) scale(1.03); }
+.product__body { padding: var(--space-4) var(--space-5) var(--space-5); display: grid; gap: var(--space-2); }
+.product__title { font-family: var(--font-family-bookman); font-size: var(--font-size-xl); line-height: var(--font-line-height-snug); }
+.product__title a { text-decoration: none; }
+.product__title a::after { content: ""; position: absolute; inset: 0; }
+.product__title a:focus-visible { outline: 0; }
+.product:has(a:focus-visible) { outline: var(--size-focus-ring) solid var(--color-action-focus); outline-offset: -3px; }
+.product__meta { display: flex; justify-content: space-between; gap: var(--space-3); }
+
+/* Feature teaser */
+.teaser { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-6); }
+.teaser p { max-width: 38ch; }
+.teaser .link-button, .section-head .link-button { align-self: flex-start; }
+
+
+/* 08. Floral Observer ----------------------------------------------------- */
+
+.article-head { display: grid; gap: var(--space-5); padding-block: var(--space-7) var(--space-6); }
+.article-head .display { font-style: italic; font-size: clamp(var(--font-size-3xl), 7vw, var(--font-size-6xl)); }
+.article-head .deck { max-width: 40ch; }
+
+.meta dt { margin-bottom: var(--space-1); }
+.meta dd { font-family: var(--font-family-fraunces); font-size: var(--font-size-lg); }
+
+.species-index { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+.species-index a { text-decoration: none; display: grid; }
+.species-index a:hover .species-index__common { text-decoration: underline; text-decoration-color: var(--color-action-underline); text-decoration-thickness: 2px; }
+.species-index__common, .species-index__latin { display: block; }
+.species-index__common { font-family: var(--font-family-bookman); font-size: var(--font-size-lg); }
+.species-index__latin { font-family: var(--font-family-newsreader); font-style: italic; color: var(--color-text-muted); }
+.rail h3 + ul { margin-top: var(--space-1); }
+.rail ul + h3 { margin-top: var(--space-5); }
+
+@media (min-width: 64rem) {
+  .rail { position: sticky; top: var(--space-4); align-self: start; }
+}
+
+/* The passage. Editors only touch the HTML inside .passage. */
+.passage {
+  max-width: var(--size-measure);
+  padding-block: var(--space-6) var(--space-8);
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+}
+.passage > * + * { margin-top: var(--space-5); }
+.passage h2 {
+  margin-top: var(--space-8);
+  font-family: var(--font-family-bookman);
+  font-size: var(--font-size-3xl);
+  font-weight: 400;
+  line-height: var(--font-line-height-snug);
+  scroll-margin-top: var(--space-6);
+}
+.passage h2 + p { margin-top: var(--space-4); }
+.passage > p:first-of-type::first-letter {
+  float: left;
+  margin: 0.06em 0.08em 0 0;
+  font-family: var(--font-family-bookman);
+  font-style: italic;
+  font-size: 4.6em;
+  line-height: 0.82;
+  color: var(--color-ink-two);
+  text-shadow: calc(var(--size-misregister) * -1) 2px 0 var(--color-ink-one);
+}
+.passage a { text-decoration-color: var(--color-action-underline); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+.pull-quote {
+  margin-block: var(--space-7);
+  padding-block: var(--space-5);
+  border-block: var(--border-hairline);
+  font-family: var(--font-family-fraunces);
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-size: var(--font-size-2xl);
+  font-style: italic;
+  font-weight: 300;
+  line-height: var(--font-line-height-snug);
+}
+.pull-quote cite { display: block; margin-top: var(--space-3); font-style: normal; }
+
+.passage figure { margin-block: var(--space-7); border: var(--border-hairline); }
+.passage figure .plate { aspect-ratio: 16 / 10; }
+.passage figure .plate img { max-width: 18rem; }
+.passage figcaption { padding: var(--space-3) var(--space-4); border-top: var(--border-hairline); }
+
+
+/* 09. Utilities ----------------------------------------------------------- */
+
+.stack > * + * { margin-top: var(--stack-gap, var(--space-4)); }
+.muted { color: var(--color-text-muted); }
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Video background */
+.video-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 100%;
+  min-height: 16rem;
+}
+.video-bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (prefers-reduced-motion: reduce) {
+  .video-bg video { display: none; }
+  .video-bg { background: url("../img/floral-observer-poster.jpg") center / cover; }
+}
+
+/* =========================================================
+   Component: issue-card
+   Paste into css/styles.css (components section).
+   Swap the --ink fallbacks for your token names in tokens.css.
+   ========================================================= */
+
+.issues {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.issue-card {
+  --issue-ink: var(--ink-cornflower, #6c8ee0);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+}
+
+.issue-card--cornflower { --issue-ink: var(--ink-cornflower, #6c8ee0); }
+.issue-card--paprika    { --issue-ink: var(--ink-paprika, #e0563a); }
+.issue-card--turquoise  { --issue-ink: var(--ink-turquoise, #2fb3b0); }
+.issue-card--violet     { --issue-ink: var(--ink-violet, #8a63c9); }
+
+/* Image slot: holds a cover image or the placeholder */
+.issue-card__image {
+  margin: 0 0 var(--space-3);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--issue-ink) 18%, transparent);
+}
+
+.issue-card__image--wide {
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  height: 100%;
+}
+
+.issue-card__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply; /* riso overprint feel */
+}
+
+.issue-card__placeholder {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border: 1px dashed var(--issue-ink);
+}
+
+.issue-card__title {
+  margin: 0;
+  font-family: var(--font-display, serif);
+  font-size: var(--text-xl, 1.5rem);
+  line-height: 1.1;
+}
+
+/* Pushes price + link to the bottom so cards align in a row */
+.issue-card__price {
+  margin-top: auto;
+}
+
+.issue-card__link {
+  align-self: start;
+  color: var(--issue-ink);
+  text-underline-offset: 0.2em;
+}
