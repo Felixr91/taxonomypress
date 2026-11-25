@@ -1,11 +1,9 @@
 import { Link, NavLink } from 'react-router';
 import { nav } from '../data/site';
-import { ThemeSwitcher } from './ThemeSwitcher';
 
 export function SiteHeader() {
   return (
     <header className="site-header grid">
-      <ThemeSwitcher />
       <div className="cell span-md-3 span-lg-6">
         <Link className="site-header__brand" to="/">
           Taxonomy <em>Press</em>
