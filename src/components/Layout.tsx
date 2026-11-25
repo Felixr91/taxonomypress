@@ -34,7 +34,7 @@ export function Layout() {
       </a>
       <div className="page">
         <SiteHeader />
-        <main id="main" tabIndex={-1}>
+        <main id="main">
           <Outlet />
         </main>
         <SiteFooter />
