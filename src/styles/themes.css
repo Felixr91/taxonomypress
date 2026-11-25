@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Taxonomy Press color themes
+   Load AFTER tokens.css. Each theme overrides two semantic tokens:
+     --color-text-primary   all text
+     --color-line-hairline  every grid line (via --border-hairline)
+   Text inks are darker than the line inks so body copy passes WCAG AA
+   (4.5:1) on natural paper. Pure Riso inks are used for the lines.
+   ========================================================================== */
+
+:root[data-theme="blue"] {
+  --theme-text: #005f99;   /* 5.9:1 on paper. Riso Blue itself is 4.1:1 */
+  --theme-line: var(--color-riso-blue);
+}
+
+:root[data-theme="cornflower"] {
+  --theme-text: #2f5f9e;   /* 5.6:1 */
+  --theme-line: var(--color-riso-cornflower);
+}
+
+:root[data-theme="violet"] {
+  --theme-text: #5c3d99;   /* 7.0:1 */
+  --theme-line: var(--color-riso-violet);
+}
+
+:root[data-theme="paprika"] {
+  --theme-text: #9a3c17;   /* 6.0:1 */
+  --theme-line: var(--color-riso-paprika);
+}
+
+:root[data-theme] {
+  --color-text-primary: var(--theme-text);
+  --color-text-muted: var(--theme-text);
+  --color-line-hairline: var(--theme-line);
+  --color-surface-inverse: var(--theme-text);
+}
+
+
+/* Theme switcher component ------------------------------------------------ */
+
+.theme-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+.theme-switcher__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-hairline);
+  background: transparent;
+  color: inherit;
+  font-family: var(--type-label-font-family);
+  font-size: var(--type-label-font-size);
+  letter-spacing: var(--type-label-letter-spacing);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.theme-switcher__button[aria-pressed="true"] {
+  background: var(--color-text-primary);
+  color: var(--color-paper-bright);
+}
+
+.theme-switcher__chip {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--chip);
+}

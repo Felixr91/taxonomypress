@@ -228,8 +228,9 @@ a { color: inherit; }
 }
 .site-nav a:first-child { border-left: 0; }
 .site-nav a:hover { background: var(--color-action-hover-fill); }
-.site-nav a[aria-current="page"] { background: var(--color-ink-two); }
-
+.site-nav a[aria-current="page"] {
+  background: color-mix(in srgb, var(--color-line-hairline) 15%, var(--color-surface-page));
+}
 .site-footer { margin-top: var(--space-7); }
 .site-footer__mark {
   font-family: var(--font-family-bookman);

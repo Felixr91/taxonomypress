@@ -13,6 +13,7 @@ import { links } from '../data/site';
 export default function Home() {
   return (
     <>
+
       <PageMeta
         title="Taxonomy Press | Risograph prints and zines"
         description="Small-batch risograph prints of birds, blooms and good dogs."
@@ -39,9 +40,6 @@ export default function Home() {
           </Plate>
         </div>
       </section>
-
-      {/* ===== Ink strip (edit inks in src/data/inks.ts) ===== */}
-      <InkStrip inks={inks} />
 
       {/* ===== Substack ===== */}
       <CtaSection
@@ -87,17 +85,16 @@ export default function Home() {
 
       {/* ===== Projects ===== */}
       <section id="shop" className="grid" aria-labelledby="shop-title">
-        <div className="cell span-md-2 span-lg-3 section-head">
-          <p className="label">§ 03 / Projects</p>
-        </div>
-        <div className="cell span-md-4 span-lg-9 section-head">
-          <div className="section-head__row">
-            <h2 id="shop-title" className="display">
-              Projects and Publications
-            </h2>
-            <LinkButton href={links.shop}>Shop</LinkButton>
-          </div>
-        </div>
+        <CtaSection
+          kicker="§ 03 / Projects"
+          title="Projects & Publications"
+          image={{ src: '/img/hawkflying.png', alt: '', width: 200, height: 200 }}
+          action={<LinkButton href={links.shop}>Shop</LinkButton>}
+        >
+          <p className="body">
+            Check out our indy books.
+          </p>
+        </CtaSection>
         {projects.map((project, i) => (
           <ProjectCard
             key={project.id}
@@ -112,6 +109,7 @@ export default function Home() {
         id="printables"
         kicker="§ 04 / Free printables"
         title="Print it at home"
+        image={{ src: '/img/goldfinch.png', alt: '', width: 200, height: 200 }}
         cards={printables.map((p, i) => (
           <DownloadCard key={p.id} printable={p} span={cardSpan(i, printables.length, { md: 2, lg: 3 })} />
         ))}
@@ -141,6 +139,9 @@ export default function Home() {
           Send us your essays, comics, foraging recipes, puzzles, and nature observations for an upcoming issue.
         </p>
       </CtaSection>
+
+      {/* ===== Ink strip (edit inks in src/data/inks.ts) ===== */}
+      <InkStrip inks={inks} />
     </>
   );
 }

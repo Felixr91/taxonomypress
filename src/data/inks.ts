@@ -17,4 +17,5 @@ export const inks: HouseInk[] = [
   { name: 'Blue', hex: '#0078BF' },
   { name: 'Raspberry', hex: '#D2515E' },
   { name: 'Yellow', hex: '#FFE800' },
+  { name: 'Turquoise', hex: '#05aa96' },
 ];

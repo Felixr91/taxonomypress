@@ -1,6 +1,7 @@
 import { ImageSlot, MetaRow, PageMeta, Plate } from '../components/primitives';
 import { PageHero } from '../components/sections';
 import { links } from '../data/site';
+import bats from '../../public/img/bats.png'
 
 /* EDITOR: fill in the meta values and guideline text below. */
 export default function OpenCall() {
@@ -14,8 +15,11 @@ export default function OpenCall() {
       <PageHero
         media={
           <Plate ink="violet">
-            <ImageSlot placeholder="Open call image" />
-          </Plate>
+
+            <ImageSlot
+              image={{ src: bats, alt: "Riso-printed bats flying in front of the moon at night" }}
+              placeholder="Open call image"
+            />          </Plate>
         }
         title={
           <>

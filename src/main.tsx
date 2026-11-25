@@ -6,6 +6,7 @@ import './styles/tokens.css';
 import './styles/styles.css';
 import './styles/components.css';
 import './styles/issue-card.css';
+import "./styles/themes.css";
 
 import App from './App';
 

@@ -1,6 +1,7 @@
 import { ImageSlot, MetaRow, PageMeta, Plate } from '../components/primitives';
 import { PageHero } from '../components/sections';
 import { links } from '../data/site';
+import warbler from '../../public/img/warbler.png';
 
 /* EDITOR: fill in the meta values and guideline text below. */
 export default function Submit() {
@@ -14,7 +15,10 @@ export default function Submit() {
       <PageHero
         media={
           <Plate ink="turquoise">
-            <ImageSlot placeholder="Submissions image" />
+            <ImageSlot
+              image={{ src: warbler, alt: "Riso-printed bats flying in front of the moon at night" }}
+              placeholder="Open call image"
+            />
           </Plate>
         }
         title="Submit"
