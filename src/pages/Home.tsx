@@ -109,7 +109,7 @@ export default function Home() {
         id="printables"
         kicker="§ 04 / Free printables"
         title="Print it at home"
-        image={{ src: '/img/goldfinch.png', alt: '', width: 200, height: 200 }}
+        image={{ src: '/img/goldfinch.png', alt: 'finch', width: 200, height: 200 }}
         cards={printables.map((p, i) => (
           <DownloadCard key={p.id} printable={p} span={cardSpan(i, printables.length, { md: 2, lg: 3 })} />
         ))}
@@ -121,6 +121,7 @@ export default function Home() {
       <CtaSection
         kicker="§ 05 / Open call"
         title="Make a book with us"
+        image={{ src: '/img/butterflysolo.png', alt: 'butterfly', width: 100, height: 100 }}
         action={<LinkButton href="/open-call">See the open call</LinkButton>}
       >
         <p className="body">
@@ -133,6 +134,7 @@ export default function Home() {
       <CtaSection
         kicker="§ 06 / Submit"
         title="Write for the Floral Observer"
+        image={{ src: '/img/toad.png', alt: 'toad', width: 100, height: 100 }}
         action={<LinkButton href="/submit">How to submit</LinkButton>}
       >
         <p className="body">
