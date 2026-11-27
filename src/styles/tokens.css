@@ -66,7 +66,7 @@
   --size-measure: 42rem;
   --size-page-max: 90rem;
   /* Offset between overprinted plates, imitating Riso misregistration. */
-  --size-misregister: 3px;
+  --size-misregister: 1.5px;
   /* Columns at the widest breakpoint. 6 at medium, 4 at small. */
   --grid-columns: 12;
   --motion-duration-quick: 120ms;

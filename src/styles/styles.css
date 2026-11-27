@@ -256,13 +256,18 @@ a { color: inherit; }
   display: inline-block;
   isolation: isolate;
   color: var(--overprint-top, var(--color-ink-four));
+    --size-misregister: 0.015em;
+
 }
 .overprint__shadow {
   position: absolute;
   inset: 0;
   z-index: 1;
   color: var(--overprint-under, var(--color-ink-one));
-  transform: translate(calc(var(--size-misregister) * 1.5), calc(var(--size-misregister) * -1));
+  transform: translate(
+    calc(var(--size-misregister) * 1.5),
+    calc(var(--size-misregister) * -1)
+  );
   mix-blend-mode: multiply;
   pointer-events: none;
   user-select: none;
